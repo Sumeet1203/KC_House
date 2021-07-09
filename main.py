@@ -1,16 +1,20 @@
+#Import libraries
 import math
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score 
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 
+#Import dataset 
 dataset = pd.read_csv('kc_house_data.csv')
-dataset = dataset.drop(['sqft_lot','zipcode', 'sqft_lot15'], axis = 1)
+dataset = dataset.drop(['sqft_lot','zipcode', 'sqft_lot15'], axis = 1)    #After experimentation, it was found that these features did not contribute much to the model (R squared value), 
+#hence to reduce computation, these features were dropped
 x = dataset.iloc[:, 1:19].values
 y = dataset.iloc[:, 0].values
 
+#Splitting data into training and testing data
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2)
 
 #Multiple Linear Regression
